@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NeuroRotina.Views.RotinaEditarPage"
+             Title="Rotina"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Nome da rotina" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoTitulo" Placeholder="Ex.: Manhã antes da escola" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Label Text="Pictograma" Style="{StaticResource Apoio}" />
+                    <CollectionView x:Name="ListaIcones"
+                                    HeightRequest="60"
+                                    SelectionMode="Single"
+                                    SelectionChanged="AoEscolherIcone">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Border WidthRequest="56" HeightRequest="56"
+                                        BackgroundColor="{StaticResource PrimariaClara}"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 14">
+                                    <Label Text="{Binding .}" FontSize="26"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Horário de início" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <TimePicker x:Name="CampoHorario" Format="HH:mm" HeightRequest="50"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource Texto}" />
+                    </Border>
+
+                    <Label Text="Observações para o cuidador" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}" Padding="12,8">
+                        <Editor x:Name="CampoDescricao"
+                                Placeholder="Ex.: avisar 10 minutos antes, sem pressa"
+                                HeightRequest="90"
+                                BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                            <Label Text="Rotina ativa" FontAttributes="Bold" />
+                            <Label Text="Rotinas pausadas não aparecem para a criança" Style="{StaticResource Apoio}" />
+                        </VerticalStackLayout>
+                        <Switch x:Name="CampoAtiva" Grid.Column="1" IsToggled="True" VerticalOptions="Center" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Alerta de transição -->
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                            <Label Text="Aviso de transição" Style="{StaticResource Subtitulo}" />
+                            <Label Text="Antecipa a mudança para reduzir a ansiedade" Style="{StaticResource Apoio}" />
+                        </VerticalStackLayout>
+                        <Switch x:Name="CampoAlertaAtivo" Grid.Column="1" Toggled="AoAlternarAlerta" VerticalOptions="Center" />
+                    </Grid>
+
+                    <VerticalStackLayout x:Name="PainelAlerta" IsVisible="False" Spacing="12">
+
+                        <Label Text="Antecedência" Style="{StaticResource Apoio}" />
+                        <Border Style="{StaticResource CampoBorda}">
+                            <Picker x:Name="CampoAntecedencia" BackgroundColor="Transparent"
+                                    SelectedIndexChanged="AoMudarAntecedencia">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>5 minutos antes</x:String>
+                                        <x:String>10 minutos antes</x:String>
+                                        <x:String>15 minutos antes</x:String>
+                                        <x:String>30 minutos antes</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Border>
+
+                        <Label Text="Mensagem falada em voz alta" Style="{StaticResource Apoio}" />
+                        <Border Style="{StaticResource CampoBorda}">
+                            <Entry x:Name="CampoMensagem"
+                                   Placeholder="Ex.: Daqui a pouco vamos tomar banho"
+                                   BackgroundColor="Transparent" />
+                        </Border>
+
+                        <Label x:Name="ResumoAlerta" Style="{StaticResource Apoio}" />
+
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button x:Name="BotaoAtividades"
+                    Text="Passos da rotina"
+                    Style="{StaticResource BotaoSecundario}"
+                    Clicked="AoAbrirAtividades" />
+
+            <Button Text="Salvar rotina" Clicked="AoSalvar" />
+
+            <Button x:Name="BotaoExcluir"
+                    Text="Excluir rotina"
+                    Style="{StaticResource BotaoPerigo}"
+                    IsVisible="False"
+                    Clicked="AoExcluir" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

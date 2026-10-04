@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<application android:allowBackup="true"
+	             android:icon="@mipmap/appicon"
+	             android:roundIcon="@mipmap/appicon_round"
+	             android:supportsRtl="true"></application>
+
+	<!-- Permite escolher fotos da galeria para usar como pictograma -->
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+	<!-- Retorno tátil ao confirmar um passo ou tocar um cartão -->
+	<uses-permission android:name="android.permission.VIBRATE" />
+
+	<!-- Necessário para a síntese de voz consultar os motores instalados -->
+	<queries>
+		<intent>
+			<action android:name="android.intent.action.TTS_SERVICE" />
+		</intent>
+	</queries>
+</manifest>

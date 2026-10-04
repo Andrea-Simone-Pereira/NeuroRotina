@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NeuroRotina.Views.CartaoEditarPage"
+             Title="Cartão"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Border WidthRequest="120" HeightRequest="120"
+                            BackgroundColor="{StaticResource Superficie}"
+                            Stroke="{StaticResource Borda}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <Grid>
+                            <Label x:Name="PreviaIcone" Text="💬" FontSize="56"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Image x:Name="PreviaImagem" Aspect="AspectFit" Margin="10" IsVisible="False" />
+                        </Grid>
+                    </Border>
+                    <Label x:Name="PreviaTexto" Text="Novo cartão" FontSize="18" FontAttributes="Bold" />
+                    <Button Text="Ouvir" Style="{StaticResource BotaoSecundario}" WidthRequest="140" Clicked="AoOuvir" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Frase do cartão" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoTexto" Placeholder="Ex.: Quero água"
+                               BackgroundColor="Transparent" TextChanged="AoMudarTexto" />
+                    </Border>
+
+                    <Label Text="Categoria" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Picker x:Name="CampoCategoria" Title="Selecione" BackgroundColor="Transparent">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Necessidades</x:String>
+                                    <x:String>Sentimentos</x:String>
+                                    <x:String>Atividades</x:String>
+                                    <x:String>Respostas</x:String>
+                                    <x:String>Pessoas</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+
+                    <Label Text="Pictograma" Style="{StaticResource Apoio}" />
+                    <CollectionView x:Name="ListaIcones"
+                                    HeightRequest="110"
+                                    SelectionMode="Single"
+                                    SelectionChanged="AoEscolherIcone">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="6"
+                                             HorizontalItemSpacing="6" VerticalItemSpacing="6" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Border HeightRequest="48"
+                                        BackgroundColor="{StaticResource PrimariaClara}"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 12">
+                                    <Label Text="{Binding .}" FontSize="24"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Escolher foto" Style="{StaticResource BotaoSecundario}" Clicked="AoEscolherFoto" />
+                        <Button x:Name="BotaoRemoverFoto" Grid.Column="1" Text="Remover foto"
+                                Style="{StaticResource BotaoSecundario}" IsVisible="False" Clicked="AoRemoverFoto" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Salvar cartão" Clicked="AoSalvar" />
+
+            <Button x:Name="BotaoExcluir" Text="Excluir cartão"
+                    Style="{StaticResource BotaoPerigo}" IsVisible="False" Clicked="AoExcluir" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

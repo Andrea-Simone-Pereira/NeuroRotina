@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NeuroRotina.Views.CriancaEditarPage"
+             Title="Criança"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Nome da criança" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoNome" Placeholder="Como você chama a criança" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Label Text="Idade" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoIdade" Placeholder="Em anos" Keyboard="Numeric" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Label Text="Nível de suporte" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Picker x:Name="CampoNivel" Title="Selecione" BackgroundColor="Transparent" />
+                    </Border>
+                    <Label Text="Informação de referência para o cuidador. O aplicativo não faz diagnóstico."
+                           Style="{StaticResource Apoio}" />
+
+                    <Label Text="Imagem do perfil" Style="{StaticResource Apoio}" />
+                    <CollectionView x:Name="ListaAvatares"
+                                    HeightRequest="64"
+                                    SelectionMode="Single"
+                                    SelectionChanged="AoEscolherAvatar">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Border WidthRequest="58" HeightRequest="58"
+                                        BackgroundColor="{StaticResource PrimariaClara}"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 16">
+                                    <Label Text="{Binding .}" FontSize="28"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Salvar" Clicked="AoSalvar" />
+
+            <Button x:Name="BotaoExcluir" Text="Excluir criança"
+                    Style="{StaticResource BotaoPerigo}" IsVisible="False" Clicked="AoExcluir" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:NeuroRotina.Models"
+             x:Class="NeuroRotina.Views.HistoricoPage"
+             Title="Histórico"
+             Shell.TabBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Border Grid.Row="0" Style="{StaticResource Cartao}" Margin="20,16,20,8">
+            <VerticalStackLayout Spacing="12">
+
+                <Label x:Name="Cabecalho" Style="{StaticResource Subtitulo}" />
+                <Label Text="Registrar como a criança reagiu ajuda a identificar quais transições precisam de mais aviso."
+                       Style="{StaticResource Apoio}" />
+
+                <Border Style="{StaticResource CampoBorda}">
+                    <Picker x:Name="CampoComportamento" Title="Como foi?" BackgroundColor="Transparent" />
+                </Border>
+
+                <Border Style="{StaticResource CampoBorda}" Padding="12,8">
+                    <Editor x:Name="CampoObservacao"
+                            Placeholder="O que aconteceu? (opcional)"
+                            HeightRequest="80"
+                            BackgroundColor="Transparent" />
+                </Border>
+
+                <Button Text="Registrar" Clicked="AoRegistrar" />
+
+            </VerticalStackLayout>
+        </Border>
+
+        <CollectionView x:Name="Lista" Grid.Row="1" Margin="20,8,20,16" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.EmptyView>
+                <Label Text="Nenhum registro ainda." Style="{StaticResource Apoio}" Padding="4,16" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Historico">
+                    <Border Style="{StaticResource Cartao}" Padding="14">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AoTocarRegistro" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Label Text="{Binding Emoji}" FontSize="28" VerticalOptions="Start" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="3">
+                                <Label Text="{Binding Comportamento}" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding DataFormatada}" Style="{StaticResource Apoio}" />
+                                <Label Text="{Binding Observacao}"
+                                       IsVisible="{Binding Observacao, Converter={StaticResource TextoNaoVazio}}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

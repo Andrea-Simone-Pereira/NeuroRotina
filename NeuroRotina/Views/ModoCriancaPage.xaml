@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:NeuroRotina.Models"
+             x:Class="NeuroRotina.Views.ModoCriancaPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{StaticResource Superficie}">
+
+    <!--
+        Tela da criança: um passo por vez, alvo de toque enorme, sem textos
+        de apoio, sem botões de navegação competindo por atenção.
+    -->
+    <Grid RowDefinitions="Auto,*,Auto,Auto" Padding="20,16,20,24" RowSpacing="14">
+
+        <!-- Progresso da rotina em blocos, não em porcentagem -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Button Text="✕"
+                    WidthRequest="44" HeightRequest="44" Padding="0" FontSize="18"
+                    Style="{StaticResource BotaoSecundario}"
+                    Clicked="AoSair" />
+            <CollectionView x:Name="ListaProgresso" Grid.Column="1" VerticalOptions="Center"
+                            SelectionMode="None" HeightRequest="14">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="6" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Atividade">
+                        <BoxView WidthRequest="26" HeightRequest="10" CornerRadius="5"
+                                 Color="{Binding Concluida, Converter={StaticResource ProgressoCor}}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label x:Name="Contador" Grid.Column="2" Style="{StaticResource Apoio}" VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Passo atual -->
+        <Border Grid.Row="1"
+                x:Name="CartaoPasso"
+                BackgroundColor="{StaticResource PrimariaClara}"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 28">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="AoTocarPasso" />
+            </Border.GestureRecognizers>
+            <Grid>
+                <Label x:Name="IconePasso" Text="⭐" FontSize="140"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+                <Image x:Name="ImagemPasso" Aspect="AspectFit" Margin="24" IsVisible="False" />
+            </Grid>
+        </Border>
+
+        <Label x:Name="NomePasso"
+               Grid.Row="2"
+               Text="Tudo pronto"
+               FontSize="34"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center" />
+
+        <Grid Grid.Row="3" ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <Button x:Name="BotaoVoltar"
+                    Text="Voltar"
+                    Style="{StaticResource BotaoSecundario}"
+                    WidthRequest="110" HeightRequest="68"
+                    Clicked="AoVoltarPasso" />
+            <Button x:Name="BotaoPronto"
+                    Grid.Column="1"
+                    Text="Pronto ✓"
+                    FontSize="22"
+                    HeightRequest="68"
+                    BackgroundColor="{StaticResource Sucesso}"
+                    Clicked="AoConcluirPasso" />
+        </Grid>
+
+        <!-- Comemoração ao concluir a rotina inteira -->
+        <Border x:Name="PainelFim"
+                Grid.RowSpan="4"
+                IsVisible="False"
+                BackgroundColor="{StaticResource SucessoClaro}"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 28"
+                Padding="30">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="20">
+                <Label Text="🎉" FontSize="90" HorizontalOptions="Center" />
+                <Label Text="Rotina concluída" FontSize="30" FontAttributes="Bold"
+                       HorizontalTextAlignment="Center" />
+                <Button Text="Fechar" WidthRequest="200" HorizontalOptions="Center" Clicked="AoSair" />
+            </VerticalStackLayout>
+        </Border>
+
+    </Grid>
+</ContentPage>

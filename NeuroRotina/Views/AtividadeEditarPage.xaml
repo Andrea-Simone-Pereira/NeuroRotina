@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NeuroRotina.Views.AtividadeEditarPage"
+             Title="Passo"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <!-- Pré-visualização igual à que a criança verá -->
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Label Text="Como a criança vê" Style="{StaticResource Apoio}" HorizontalOptions="Center" />
+                    <Border WidthRequest="140" HeightRequest="140"
+                            BackgroundColor="{StaticResource PrimariaClara}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 24">
+                        <Grid>
+                            <Label x:Name="PreviaIcone" Text="⭐" FontSize="64"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Image x:Name="PreviaImagem" Aspect="AspectFill" IsVisible="False" />
+                        </Grid>
+                    </Border>
+                    <Label x:Name="PreviaTexto" Text="Novo passo" FontSize="22" FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    <Button Text="Ouvir" Style="{StaticResource BotaoSecundario}"
+                            WidthRequest="140" Clicked="AoOuvir" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Nome do passo" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoNome" Placeholder="Ex.: Escovar os dentes"
+                               BackgroundColor="Transparent" TextChanged="AoMudarNome" />
+                    </Border>
+
+                    <Label Text="O que será falado em voz alta" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoAudio" Placeholder="Deixe vazio para falar o nome do passo"
+                               BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Label Text="Pictograma" Style="{StaticResource Apoio}" />
+                    <CollectionView x:Name="ListaIcones"
+                                    HeightRequest="140"
+                                    SelectionMode="Single"
+                                    SelectionChanged="AoEscolherIcone">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="6"
+                                             HorizontalItemSpacing="6" VerticalItemSpacing="6" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Border HeightRequest="48"
+                                        BackgroundColor="{StaticResource PrimariaClara}"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 12">
+                                    <Label Text="{Binding .}" FontSize="24"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Ou use uma foto do dia a dia da criança, que costuma ser reconhecida mais rápido que um desenho."
+                           Style="{StaticResource Apoio}" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Escolher foto" Style="{StaticResource BotaoSecundario}" Clicked="AoEscolherFoto" />
+                        <Button x:Name="BotaoRemoverFoto" Grid.Column="1" Text="Remover foto"
+                                Style="{StaticResource BotaoSecundario}" IsVisible="False" Clicked="AoRemoverFoto" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Salvar passo" Clicked="AoSalvar" />
+
+            <Button x:Name="BotaoExcluir" Text="Excluir passo"
+                    Style="{StaticResource BotaoPerigo}" IsVisible="False" Clicked="AoExcluir" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

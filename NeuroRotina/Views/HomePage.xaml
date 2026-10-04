@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:NeuroRotina.Models"
+             x:Class="NeuroRotina.Views.HomePage"
+             Title="Hoje">
+
+    <RefreshView x:Name="Atualizador" Refreshing="AoAtualizar">
+        <ScrollView>
+            <VerticalStackLayout Padding="20,16,20,32" Spacing="18">
+
+                <!-- Quem está sendo acompanhado agora -->
+                <Border Style="{StaticResource Cartao}">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                        <Label x:Name="AvatarCrianca" Text="🧒" FontSize="40" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label x:Name="NomeCrianca" Text="Nenhuma criança" Style="{StaticResource Subtitulo}" />
+                            <Label x:Name="ResumoCrianca" Text="Cadastre uma criança no perfil" Style="{StaticResource Apoio}" />
+                        </VerticalStackLayout>
+                        <Button Grid.Column="2"
+                                Text="Trocar"
+                                Style="{StaticResource BotaoSecundario}"
+                                HeightRequest="40"
+                                FontSize="14"
+                                Padding="14,0"
+                                Clicked="AoTrocarCrianca" />
+                    </Grid>
+                </Border>
+
+                <!-- Aviso visual de alerta disparado -->
+                <Border x:Name="PainelAlerta"
+                        IsVisible="False"
+                        BackgroundColor="{StaticResource DestaqueClaro}"
+                        Stroke="{StaticResource Destaque}"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="16">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Label Text="🔔" FontSize="28" VerticalOptions="Center" />
+                        <Label x:Name="TextoAlerta"
+                               Grid.Column="1"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                        <Button Grid.Column="2"
+                                Text="Ok"
+                                HeightRequest="40"
+                                FontSize="14"
+                                Padding="16,0"
+                                Clicked="AoFecharAlerta" />
+                    </Grid>
+                </Border>
+
+                <!-- Próxima transição -->
+                <Border Style="{StaticResource Cartao}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Próxima rotina" Style="{StaticResource Apoio}" />
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                            <Label x:Name="IconeProxima" Text="🌙" FontSize="40" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label x:Name="TituloProxima" Text="Nada programado" FontSize="22" FontAttributes="Bold" />
+                                <Label x:Name="HorarioProxima" Text="Crie a primeira rotina na aba Rotinas" Style="{StaticResource Apoio}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Button x:Name="BotaoModoCrianca"
+                                Text="Abrir modo criança"
+                                IsEnabled="False"
+                                Clicked="AoAbrirModoCrianca" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Rotinas do dia -->
+                <Label Text="Rotinas de hoje" Style="{StaticResource Subtitulo}" />
+
+                <VerticalStackLayout x:Name="ListaRotinas" Spacing="10">
+                    <BindableLayout.EmptyView>
+                        <Border Style="{StaticResource Cartao}">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="Sem rotinas cadastradas" Style="{StaticResource Subtitulo}" />
+                                <Label Text="Uma rotina é uma sequência de passos com hora marcada, como “Manhã” ou “Hora de dormir”."
+                                       Style="{StaticResource Apoio}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </BindableLayout.EmptyView>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Rotina">
+                            <Border Style="{StaticResource Cartao}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="AoTocarRotina" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                                    <Label Text="{Binding Icone}" FontSize="30" VerticalOptions="Center" />
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                        <Label Text="{Binding Titulo}" FontSize="17" FontAttributes="Bold" />
+                                        <Label Text="{Binding Legenda}" Style="{StaticResource Apoio}" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="2"
+                                           Text="{Binding Horario}"
+                                           FontSize="17"
+                                           TextColor="{StaticResource Primaria}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Button Text="Registrar como foi o dia"
+                        Style="{StaticResource BotaoSecundario}"
+                        Clicked="AoAbrirHistorico" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

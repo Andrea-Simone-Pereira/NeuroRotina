@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:NeuroRotina.Models"
+             x:Class="NeuroRotina.Views.ComunicacaoPage"
+             Title="Comunicação">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+        <!-- O que a criança acabou de dizer -->
+        <Border Grid.Row="0" Margin="16,12,16,0" Padding="16"
+                BackgroundColor="{StaticResource DestaqueClaro}"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 16">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Label x:Name="EcoIcone" Text="💬" FontSize="34" VerticalOptions="Center" />
+                <Label x:Name="EcoTexto" Grid.Column="1"
+                       Text="Toque em um cartão para falar"
+                       FontSize="20" FontAttributes="Bold"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" Margin="0,12,0,4">
+            <HorizontalStackLayout x:Name="Filtros" Padding="16,0" Spacing="8" />
+        </ScrollView>
+
+        <CollectionView x:Name="Lista" Grid.Row="2" Margin="16,8,16,0" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3"
+                                 HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="28" Spacing="8">
+                    <Label Text="Nenhum cartão nesta categoria" Style="{StaticResource Subtitulo}" />
+                    <Label Text="Cadastre um cartão com uma palavra curta e um pictograma claro."
+                           Style="{StaticResource Apoio}" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Cartao">
+                    <Border BackgroundColor="{StaticResource Superficie}"
+                            Stroke="{StaticResource Borda}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 18"
+                            HeightRequest="128"
+                            Padding="8">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AoTocarCartao" />
+                        </Border.GestureRecognizers>
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="6">
+                            <Grid HeightRequest="60">
+                                <Label Text="{Binding Icone}" FontSize="46"
+                                       HorizontalOptions="Center" VerticalOptions="Center"
+                                       IsVisible="{Binding TemImagem, Converter={StaticResource Inverter}}" />
+                                <Image Source="{Binding Imagem}" Aspect="AspectFit"
+                                       IsVisible="{Binding TemImagem}" />
+                            </Grid>
+                            <Label Text="{Binding Texto}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="3" Text="Gerenciar cartões"
+                Style="{StaticResource BotaoSecundario}"
+                Margin="16,12,16,16"
+                Clicked="AoGerenciar" />
+    </Grid>
+</ContentPage>

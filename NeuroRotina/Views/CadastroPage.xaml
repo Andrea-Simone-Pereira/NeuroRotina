@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NeuroRotina.Views.CadastroPage"
+             Title="Criar conta"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+
+            <Label Text="Quem vai organizar as rotinas?"
+                   Style="{StaticResource Subtitulo}" />
+            <Label Text="A conta é do responsável. Os dados ficam guardados apenas neste aparelho."
+                   Style="{StaticResource Apoio}" />
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoNome" Placeholder="Nome completo" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoEmail" Placeholder="E-mail" Keyboard="Email" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoSenha" Placeholder="Senha (mínimo 6 caracteres)" IsPassword="True" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoConfirmacao" Placeholder="Repita a senha" IsPassword="True" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Label Text="Relação com a criança" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Picker x:Name="CampoTipo" Title="Selecione" BackgroundColor="Transparent">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Mãe ou pai</x:String>
+                                    <x:String>Cuidador</x:String>
+                                    <x:String>Familiar</x:String>
+                                    <x:String>Profissional</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+
+                    <Label x:Name="RotuloErro" TextColor="{StaticResource Perigo}" FontSize="14" IsVisible="False" />
+
+                    <Button x:Name="BotaoSalvar" Text="Criar conta" Clicked="AoSalvar" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

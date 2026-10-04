@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:NeuroRotina.Models"
+             x:Class="NeuroRotina.Views.AtividadesPage"
+             Title="Passos da rotina"
+             Shell.TabBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <VerticalStackLayout Padding="20,14,20,8" Spacing="4">
+            <Label x:Name="Cabecalho" Style="{StaticResource Subtitulo}" />
+            <Label Text="A ordem dos passos é a ordem que a criança vê. Use as setas para reorganizar."
+                   Style="{StaticResource Apoio}" />
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="Lista" Grid.Row="1" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="28" Spacing="8">
+                    <Label Text="🧩" FontSize="40" />
+                    <Label Text="Nenhum passo cadastrado" Style="{StaticResource Subtitulo}" />
+                    <Label Text="Quebre a rotina em passos curtos: escovar os dentes, vestir a roupa, calçar o sapato."
+                           Style="{StaticResource Apoio}" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Atividade">
+                    <Border Style="{StaticResource Cartao}" Margin="20,0" Padding="12">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AoTocar" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+
+                            <Border WidthRequest="52" HeightRequest="52"
+                                    BackgroundColor="{StaticResource PrimariaClara}"
+                                    Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 14"
+                                    VerticalOptions="Center">
+                                <Grid>
+                                    <Label Text="{Binding Icone}" FontSize="26"
+                                           HorizontalOptions="Center" VerticalOptions="Center"
+                                           IsVisible="{Binding TemImagem, Converter={StaticResource Inverter}}" />
+                                    <Image Source="{Binding Imagem}" Aspect="AspectFill"
+                                           IsVisible="{Binding TemImagem}" />
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding NomeAtividade}" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding Audio}" Style="{StaticResource Apoio}"
+                                       IsVisible="{Binding Audio, Converter={StaticResource TextoNaoVazio}}" />
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="2" Text="↑"
+                                    Style="{StaticResource BotaoSecundario}"
+                                    WidthRequest="44" HeightRequest="44" Padding="0" FontSize="18"
+                                    CommandParameter="{Binding IdAtividade}"
+                                    Clicked="AoSubir" />
+
+                            <Button Grid.Column="3" Text="↓"
+                                    Style="{StaticResource BotaoSecundario}"
+                                    WidthRequest="44" HeightRequest="44" Padding="0" FontSize="18"
+                                    CommandParameter="{Binding IdAtividade}"
+                                    Clicked="AoDescer" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="2" Padding="20,10,20,20" Spacing="10">
+            <Button Text="Adicionar passo" Clicked="AoCriar" />
+            <Button Text="Ver como a criança vê"
+                    Style="{StaticResource BotaoSecundario}"
+                    Clicked="AoVisualizar" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

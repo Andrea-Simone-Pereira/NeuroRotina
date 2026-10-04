@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:NeuroRotina.Models"
+             x:Class="NeuroRotina.Views.RotinasPage"
+             Title="Rotinas">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <RefreshView x:Name="Atualizador" Refreshing="AoAtualizar">
+            <CollectionView x:Name="Lista" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.Header>
+                    <VerticalStackLayout Padding="20,16,20,10" Spacing="4">
+                        <Label x:Name="Cabecalho" Text="Rotinas" Style="{StaticResource Subtitulo}" />
+                        <Label Text="Toque em uma rotina para editar os passos, o horário e o alerta."
+                               Style="{StaticResource Apoio}" />
+                    </VerticalStackLayout>
+                </CollectionView.Header>
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="28" Spacing="8">
+                        <Label Text="🗂️" FontSize="40" />
+                        <Label Text="Nenhuma rotina ainda" Style="{StaticResource Subtitulo}" />
+                        <Label Text="Comece por um momento crítico do dia, como sair de casa ou dormir."
+                               Style="{StaticResource Apoio}" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Rotina">
+                        <Border Style="{StaticResource Cartao}" Margin="20,0">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AoTocar" />
+                            </Border.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                                <Label Text="{Binding Icone}" FontSize="30" VerticalOptions="Center" />
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                    <Label Text="{Binding Titulo}" FontSize="17" FontAttributes="Bold" />
+                                    <Label Style="{StaticResource Apoio}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Horario}" />
+                                                <Span Text=" · " />
+                                                <Span Text="{Binding Legenda}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2"
+                                       Text="Pausada"
+                                       Style="{StaticResource Apoio}"
+                                       VerticalOptions="Center"
+                                       IsVisible="{Binding Ativa, Converter={StaticResource Inverter}}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Button Grid.Row="1"
+                Text="Nova rotina"
+                Margin="20,10,20,20"
+                Clicked="AoCriar" />
+    </Grid>
+</ContentPage>

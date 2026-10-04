@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Escala tipográfica: 13 / 15 / 17 / 22 / 28 / 44 -->
+
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource Fundo}" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Texto}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="LineHeight" Value="1.35" />
+    </Style>
+
+    <Style x:Key="Titulo" TargetType="Label">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource Texto}" />
+    </Style>
+
+    <Style x:Key="Subtitulo" TargetType="Label">
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource Texto}" />
+    </Style>
+
+    <Style x:Key="Apoio" TargetType="Label">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextColor" Value="{StaticResource TextoSuave}" />
+    </Style>
+
+    <!-- Alvos de toque grandes: nunca menos de 52 de altura -->
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primaria}" />
+        <Setter Property="TextColor" Value="{StaticResource TextoInverso}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="Padding" Value="20,0" />
+    </Style>
+
+    <Style x:Key="BotaoSecundario" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimariaClara}" />
+        <Setter Property="TextColor" Value="{StaticResource Primaria}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="HeightRequest" Value="52" />
+    </Style>
+
+    <Style x:Key="BotaoPerigo" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{StaticResource Perigo}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="BorderColor" Value="{StaticResource Perigo}" />
+        <Setter Property="BorderWidth" Value="1" />
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{StaticResource Texto}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextoSuave}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Superficie}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
+    <Style TargetType="Editor">
+        <Setter Property="TextColor" Value="{StaticResource Texto}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextoSuave}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Superficie}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="TextColor" Value="{StaticResource Texto}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Superficie}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
+    <!-- Moldura padrão usada em formulários e listas -->
+    <Style x:Key="Cartao" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Superficie}" />
+        <Setter Property="Stroke" Value="{StaticResource Borda}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+    </Style>
+
+    <Style x:Key="CampoBorda" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Superficie}" />
+        <Setter Property="Stroke" Value="{StaticResource Borda}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+    </Style>
+
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primaria}" />
+        <Setter Property="Shell.ForegroundColor" Value="{StaticResource TextoInverso}" />
+        <Setter Property="Shell.TitleColor" Value="{StaticResource TextoInverso}" />
+        <Setter Property="Shell.NavBarHasShadow" Value="False" />
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Superficie}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource Primaria}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource Primaria}" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource TextoSuave}" />
+    </Style>
+
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{StaticResource Primaria}" />
+    </Style>
+
+    <Style TargetType="Switch">
+        <Setter Property="OnColor" Value="{StaticResource Primaria}" />
+        <Setter Property="ThumbColor" Value="{StaticResource Superficie}" />
+    </Style>
+
+</ResourceDictionary>

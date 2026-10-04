@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:NeuroRotina.Models"
+             x:Class="NeuroRotina.Views.PerfilPage"
+             Title="Perfil">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,16,20,32" Spacing="18">
+
+            <!-- Dados do responsável -->
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                        <Border WidthRequest="54" HeightRequest="54"
+                                BackgroundColor="{StaticResource Primaria}"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 27">
+                            <Label x:Name="Iniciais" Text="?" FontSize="22" FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label x:Name="NomeUsuario" Style="{StaticResource Subtitulo}" />
+                            <Label x:Name="EmailUsuario" Style="{StaticResource Apoio}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Label Text="Nome" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoNome" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Label Text="Nova senha (deixe vazio para manter a atual)" Style="{StaticResource Apoio}" />
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoSenha" IsPassword="True" Placeholder="••••••" BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Button Text="Salvar alterações" Clicked="AoSalvarPerfil" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Crianças acompanhadas -->
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Crianças acompanhadas" Style="{StaticResource Subtitulo}" VerticalOptions="Center" />
+                <Button Grid.Column="1" Text="Adicionar"
+                        Style="{StaticResource BotaoSecundario}"
+                        HeightRequest="40" FontSize="14" Padding="14,0"
+                        Clicked="AoAdicionarCrianca" />
+            </Grid>
+
+            <CollectionView x:Name="ListaCriancas" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <Border Style="{StaticResource Cartao}">
+                        <Label Text="Nenhuma criança cadastrada. Toque em Adicionar para começar."
+                               Style="{StaticResource Apoio}" />
+                    </Border>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Crianca">
+                        <Border Style="{StaticResource Cartao}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AoTocarCrianca" />
+                            </Border.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                                <Label Text="{Binding Avatar}" FontSize="32" VerticalOptions="Center" />
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                    <Label Text="{Binding Nome}" FontSize="17" FontAttributes="Bold" />
+                                    <Label Text="{Binding Resumo}" Style="{StaticResource Apoio}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Histórico de comportamento"
+                    Style="{StaticResource BotaoSecundario}"
+                    Clicked="AoAbrirHistorico" />
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Sobre o aplicativo" Style="{StaticResource Subtitulo}" />
+                    <Label Text="NeuroRotina 1.0 · Projeto de TCC" Style="{StaticResource Apoio}" />
+                    <Label Text="Os dados ficam gravados somente neste aparelho, em banco local SQLite."
+                           Style="{StaticResource Apoio}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Sair da conta" Style="{StaticResource BotaoPerigo}" Clicked="AoSair" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

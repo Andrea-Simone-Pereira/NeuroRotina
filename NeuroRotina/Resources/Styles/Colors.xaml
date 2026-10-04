@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--
+        Paleta de baixa estimulação. Crianças com TEA costumam ser sensíveis a
+        cores saturadas e a contrastes agressivos, por isso o fundo é neutro,
+        o azul-petróleo conduz a navegação e o âmbar aparece só no que precisa
+        de atenção imediata (atividade atual e confirmações).
+    -->
+
+    <Color x:Key="Primaria">#2F6F7E</Color>
+    <Color x:Key="PrimariaEscura">#235561</Color>
+    <Color x:Key="PrimariaClara">#E4EFF1</Color>
+
+    <Color x:Key="Destaque">#F2B544</Color>
+    <Color x:Key="DestaqueClaro">#FDF1D9</Color>
+
+    <Color x:Key="Fundo">#F5F7F6</Color>
+    <Color x:Key="Superficie">#FFFFFF</Color>
+    <Color x:Key="Borda">#DCE5E4</Color>
+
+    <Color x:Key="Texto">#1B2B2F</Color>
+    <Color x:Key="TextoSuave">#5A6B70</Color>
+    <Color x:Key="TextoInverso">#FFFFFF</Color>
+
+    <Color x:Key="Sucesso">#4E8C63</Color>
+    <Color x:Key="SucessoClaro">#E4F0E8</Color>
+    <Color x:Key="Perigo">#B4482A</Color>
+
+    <SolidColorBrush x:Key="PincelPrimaria" Color="{StaticResource Primaria}" />
+    <SolidColorBrush x:Key="PincelFundo" Color="{StaticResource Fundo}" />
+
+</ResourceDictionary>

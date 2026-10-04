@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NeuroRotina.Views.LoginPage"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="28,60,28,32" Spacing="24">
+
+            <VerticalStackLayout Spacing="6">
+                <Label Text="🗓️" FontSize="44" />
+                <Label Text="NeuroRotina" Style="{StaticResource Titulo}" />
+                <Label Text="Rotinas visuais e comunicação por imagens para crianças autistas não verbais."
+                       Style="{StaticResource Apoio}"
+                       MaximumWidthRequest="360" />
+            </VerticalStackLayout>
+
+            <Border Style="{StaticResource Cartao}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Entrar" Style="{StaticResource Subtitulo}" />
+
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoEmail"
+                               Placeholder="E-mail"
+                               Keyboard="Email"
+                               ReturnType="Next"
+                               BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Border Style="{StaticResource CampoBorda}">
+                        <Entry x:Name="CampoSenha"
+                               Placeholder="Senha"
+                               IsPassword="True"
+                               ReturnType="Done"
+                               BackgroundColor="Transparent"
+                               Completed="AoEntrar" />
+                    </Border>
+
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <CheckBox x:Name="CampoLembrar" IsChecked="True" Color="{StaticResource Primaria}" />
+                        <Label Text="Continuar conectado" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="RotuloErro"
+                           TextColor="{StaticResource Perigo}"
+                           FontSize="14"
+                           IsVisible="False" />
+
+                    <Button x:Name="BotaoEntrar" Text="Entrar" Clicked="AoEntrar" />
+
+                    <ActivityIndicator x:Name="Carregando" IsRunning="False" IsVisible="False" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Criar uma conta"
+                    Style="{StaticResource BotaoSecundario}"
+                    Clicked="AoCriarConta" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
