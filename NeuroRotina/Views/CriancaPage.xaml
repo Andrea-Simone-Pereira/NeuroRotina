@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="NeuroRotina.Views.CriancaPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="15">
+
+            <Label
+                Text="NEUROROTINA"
+                FontSize="30"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="CADASTRO DA CRIANÇA"
+                FontSize="22"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Entry
+                x:Name="txtNome"
+                Placeholder="Nome da criança" />
+
+            <Label
+                Text="DATA DE NASCIMENTO"
+                FontAttributes="Bold" />
+
+            <DatePicker
+                x:Name="dtpNascimento" />
+
+            <Label
+                Text="NÍVEL DE SUPORTE"
+                FontAttributes="Bold" />
+
+            <Picker
+                x:Name="pckNivelSuporte"
+                Title="Selecione o nível de suporte">
+
+                <Picker.Items>
+                    <x:String>Nível 1</x:String>
+                    <x:String>Nível 2</x:String>
+                    <x:String>Nível 3</x:String>
+                </Picker.Items>
+
+            </Picker>
+
+            <Label
+                Text="PIN DA CRIANÇA"
+                FontAttributes="Bold" />
+
+            <Entry
+                x:Name="txtPin"
+                Placeholder="Digite um PIN de 4 dígitos"
+                Keyboard="Numeric"
+                MaxLength="4"
+                IsPassword="True" />
+
+            <Editor
+                x:Name="txtObservacoes"
+                Placeholder="Observações"
+                HeightRequest="120" />
+
+            <Button
+                Text="CADASTRAR CRIANÇA"
+                Clicked="BtnCadastrar_Clicked" />
+
+            <Label
+                x:Name="lblMensagem"
+                FontSize="16"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

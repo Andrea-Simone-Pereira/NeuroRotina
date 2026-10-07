@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="NeuroRotina.Views.InicioCriancaPage"
+    Title="NEUROROTINA">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="25">
+
+            <Label
+                Text="NEUROROTINA"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="lblNomeCrianca"
+                Text="OLÁ!"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
+
+            <Button
+                Text="ATIVIDADES"
+                FontSize="24"
+                HeightRequest="100"
+                HorizontalOptions="Fill"
+                Clicked="BtnAtividades_Clicked" />
+
+            <Button
+                Text="NECESSIDADES"
+                FontSize="24"
+                HeightRequest="100"
+                HorizontalOptions="Fill"
+                Clicked="BtnNecessidades_Clicked" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="NeuroRotina.Views.InicioPage"
+    Title="INÍCIO">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="20">
+
+            <Label
+                Text="NEUROROTINA"
+                FontSize="30"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="ÁREA DO ADULTO"
+                FontSize="22"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="MINHAS CRIANÇAS"
+                FontSize="20"
+                HeightRequest="70"
+                Clicked="BtnMinhasCriancas_Clicked" />
+
+            <Button
+                Text="CADASTRAR CRIANÇA"
+                FontSize="20"
+                HeightRequest="70"
+                Clicked="BtnCadastrarCrianca_Clicked" />
+
+            <Button
+                Text="CONFIGURAÇÕES"
+                FontSize="20"
+                HeightRequest="70"
+                Clicked="BtnConfiguracoes_Clicked" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
